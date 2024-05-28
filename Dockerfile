@@ -1,13 +1,14 @@
-FROM python:3.7-buster
+FROM python:3.11
 
-LABEL maintainer=david@dme.ninja
-LABEL version="0.1"
+LABEL maintainer=https://github.com/dvdme
+LABEL version="1.0.0"
 
-# Copy scripts and requirements.txt
-COPY src/ /gandi-live-dns
-COPY requirements.txt /requirements.txt
+COPY . /usr/src/gandi_live_dns
+WORKDIR /usr/src/gandi_live_dns
 
 # Install script requirements.txt
-RUN pip install -r /requirements.txt
+RUN pip install -r requirements.txt
 
-CMD ["python", "/gandi-live-dns/gandi-live-dns.py", "-v", "-r", "3600"]
+ENTRYPOINT ["python3", "gandi_live_dns.py"]
+
+CMD ["python3", "gandi_live_dns.py", "--help"]
